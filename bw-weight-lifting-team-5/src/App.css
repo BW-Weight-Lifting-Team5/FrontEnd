@@ -36,3 +36,6 @@
     transform: rotate(360deg);
   }
 }
+.delete {
+  color: rgb(216, 87, 87);
+}
