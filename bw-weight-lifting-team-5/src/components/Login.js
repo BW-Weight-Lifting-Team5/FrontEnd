@@ -32,13 +32,23 @@ class Login extends React.Component {
       this.setState({
         isFetching: true
       })
-      axiosWithAuth()
+    //   console.log(localStorage.getItem('token'))
+      const token = localStorage.getItem('token')
+      if(!token) {
+        //   console.log('have to use username and password')
+          axiosWithAuth()
         .post('/login', this.state.credentials)
         .then(res => {
           localStorage.setItem('token', res.data.payload)
           this.props.history.push('/exercises')
         })
         .catch(err =>  console.log(err))
+      } else{
+        //   console.log('let user in')
+          this.props.history.push('/exercises')
+
+      }
+      
 
     }
 
