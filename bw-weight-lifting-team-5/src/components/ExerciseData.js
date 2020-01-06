@@ -1,5 +1,5 @@
 
-// token -> workouts
+// assume there is only 1 user
 // workouts -> exercises
 // exercise
 
@@ -29,9 +29,4 @@ let exercises = {
             }
         ]
 
-}
-
-// token -> workouts
-let users = {
-    'really-long-token-string' : [1]
 }
