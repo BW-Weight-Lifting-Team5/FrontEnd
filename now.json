@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "name": "FrontEnd",
+    "builds": [{ "src": "bw-weight-lifting-team-5/package.json", "use": "@now/static-build", "config": {"distDir": "build"} }],
+    "routes": [
+    { "src": "/(.*)", "dest": "bw-weight-lifting-team-5/$1" }
+    ]
+    }
+    
