@@ -1,0 +1,28 @@
+{
+    "name": "BW",
+    "version": "1.0.0",
+    "description": "Build Week",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/BW-Weight-Lifting-Team5/FrontEnd.git"
+    },
+    "keywords": [],
+    "author": "David Tauraso",
+    "license": "None",
+    "bugs": {
+      "url": "https://github.com/BW-Weight-Lifting-Team5/FrontEnd/issues"
+    },
+    "homepage": "https://bw-weight-lifting-team-5.dtauraso.now.sh/",
+    "dependencies": {
+      "cors": "^2.8.5",
+      "express": "^4.17.1"
+    },
+    "devDependencies": {
+      "nodemon": "^1.19.1"
+    }
+}
+  
