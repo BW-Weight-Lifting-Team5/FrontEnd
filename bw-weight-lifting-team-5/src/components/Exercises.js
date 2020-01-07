@@ -17,11 +17,15 @@ const Exercises = () => {
 
     const [makeNewExercise, setMakeNewExercise] = useState(false)
     const [exerciseToAdd, setExerciseToAdd] = useState(initialExercise)
-    
+
+    let [myExercises, setMyExercises] = useState(exercises[1])
+
     // delete
     const deleteExercise = exercise => {
 
         console.log('delete exercise', exercise)
+        console.log(myExercises)
+        setMyExercises(myExercises.filter(exer => exer.id !== exercise.id))
     }
 
     /// edit
@@ -35,6 +39,17 @@ const Exercises = () => {
     const saveExercise = (e, exercise) => {
         e.preventDefault()
         console.log('save edited exercise', exercise)
+        // console.log([
+        //     ...myExercises.slice(0, exercise.id),
+        //     exercise,
+        //     ...myExercises.slice(exercise.id + 1)
+        // ])
+        setMyExercises([
+            ...myExercises.slice(0, exercise.id),
+            exercise,
+            ...myExercises.slice(exercise.id + 1)
+        ])
+        // setMyExercises([myExercises.spl, exercise])
     }
     //////
 
@@ -42,6 +57,7 @@ const Exercises = () => {
     const addExercise = (e, exercise) => {
         e.preventDefault()
         console.log('add exercise', exercise)
+        setMyExercises([...myExercises, exercise])
         // setMakeNewExercise(true)
         // setExerciseToAdd(exercise)
     }
@@ -50,7 +66,7 @@ const Exercises = () => {
         <div>
             <h1>exercise page</h1>
             {/* Read */}
-            {exercises[1].map((exercise, i) => (
+            {myExercises.map((exercise, i) => (
                 <Exercise
                     key={i}
                     exercise={exercise}
