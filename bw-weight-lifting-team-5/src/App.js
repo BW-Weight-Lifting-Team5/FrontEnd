@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.  I am continuous deployment
+          Edit <code>src/App.js</code> and save to test again reload.  I am continuous deployment
         </p>
         <a
           className="App-link"
