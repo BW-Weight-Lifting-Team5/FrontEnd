@@ -52,7 +52,28 @@ const Exercises = () => {
         // setMyExercises([myExercises.spl, exercise])
     }
     //////
+/*
+exercise: "Squat",
+weight: 150,
+units: "lbs",
+sets: 2,
+reps: 8,
+workout_id: 1
 
+
+
+id: 1,
+date: "2/20/2020",
+workout_name: "Triceps",
+user_id: 1
+
+
+
+email: "test123@email.com",
+password: "password",
+firstName: "Who",
+lastName: "knows"
+*/
     // add
     const addExercise = (e, exercise) => {
         e.preventDefault()
