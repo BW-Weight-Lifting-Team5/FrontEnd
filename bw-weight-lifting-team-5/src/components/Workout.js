@@ -11,7 +11,7 @@ const Workout = (props) => {
                 e.stopPropagation()
                 props.deleteWorkout(props.workout)
             }}>x </span>
-                {exerciseName}
+                {/* {workoutName} */}
                 <span onClick={e => {
                     e.stopPropagation()
                     props.editWorkout(props.workout)

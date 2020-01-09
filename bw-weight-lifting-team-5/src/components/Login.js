@@ -9,9 +9,9 @@ class Login extends React.Component {
     credentials: {
 
         email: '',
-        password: '',
-        firstname: '',
-        lastname: ''
+        password: ''
+        // firstname: '',
+        // lastname: ''
     },
     isFetching: false
 }
@@ -45,6 +45,18 @@ class Login extends React.Component {
     // firstName: "eee"
     // lastName: "fff"
 
+    // email: "soeee@sorrrme.com"
+    // password: "$2eeea$10$VI9f921UQuuiCrrrElRX8KD/OhsrZXpoOMvyvnlvpXni0Fq/2Jvokniq"
+    // firstName: "eee"
+    // lastName: "fff"
+
+
+
+    // email: "soe444ee@seeeome.com"
+    // password: "$2ee444ea$10$VI9eeef921UQuuiCElRX8KD/OhsrZXpoOMvyvnlvpXni0Fq/2Jvokniq"
+    // firstName: "eee"
+    // lastName: "fff"
+    // https://weight-lifters-journal-5.herokuapp.com/api/auth/login
     //   console.log(localStorage.getItem('token'))
       const token = localStorage.getItem('token')
       if(!token) {
@@ -112,7 +124,7 @@ class Login extends React.Component {
                 placeholder='password'
   
             />
-             <input
+             {/* <input
                 type="text"
                 name="firstname"
                 value={this.state.credentials.firstname}
@@ -127,7 +139,7 @@ class Login extends React.Component {
                 onChange={this.handleChange}
                 placeholder='lastname'
   
-            />
+            /> */}
             <button>Log in</button>
             {this.state.isFetching && 
                 <Loader

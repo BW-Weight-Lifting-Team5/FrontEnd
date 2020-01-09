@@ -32,7 +32,7 @@ export const getContainer = (url, setter, pathToPayload, fakeData) => {
             console.log(err)
         })
     setter(fakeData)
-    
+
 }
 
 // delete(remove item) axios delete
@@ -56,7 +56,7 @@ export const deleteItem = (item, appContainer, setter, url) => {
 export const updateItem = (e, item, appContainer, setter, url) => {
     e.preventDefault()
     console.log('save edited exercise', item)
-     axios
+    axios
         .put(url, item)
         .then(res => {
             console.log(res)

@@ -173,7 +173,7 @@ const Exercises = () => {
         // })
         getContainer(`https://reqres.in/api/WeightLiftingBW`,
                     setMyExercises,
-                    ['data'], 
+                    ['payload'], 
                     exercises[1])
         console.log(myExercises)
 

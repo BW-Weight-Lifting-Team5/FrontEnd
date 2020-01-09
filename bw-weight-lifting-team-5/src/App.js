@@ -6,7 +6,7 @@ import Register from './components/Register'
 
 import PrivateRoute from './components/PrivateRoute'
 import Exercises from './components/Exercises'
-
+import Workouts from './components/Workouts'
 
 import './App.css';
 
@@ -24,6 +24,7 @@ function App() {
         <Switch>
           {/* <PrivateRoute path='/exercises' component={Exercises} /> */}
           <Route path='/exercises' component={Exercises} />
+          <Route path='/workouts' component={Workouts} />
 
           <Route path='/register' component={Register} />
 

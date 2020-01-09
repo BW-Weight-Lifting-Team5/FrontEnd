@@ -6,7 +6,7 @@ import {
     getContainer,
     deleteItem,
     updateItem,
-    saveItem,
+    addItem,
 } from './AxiosOperations'
 
 let workoutData = [
@@ -30,10 +30,25 @@ const Workouts = () => {
     let [myWorkout, setMyWorkouts] = useState(workoutData)
     // print in console
     // press presetup buttons to test operations
-    const printExercises = () => {
+    const printWorkouts = () => {
         console.log(myWorkout)
     }
-    const deleteWorkout = workout => {
+
+    const getWorkouts = (e) => {
+        // axios.get(`https://reqres.in/api/WeightLiftingBW`)
+        // .then(res => {
+        //     console.log(res)
+        //     setMyExercises(res.data)
+        // })
+        getContainer(`https://reqres.in/api/WeightLiftingBW`,
+                    setMyWorkouts,
+                    ['payload'], 
+                    workoutData)
+        console.log(workoutData)
+
+    }
+
+    const deleteWorkout = (e, workout) => {
 
         // fake axios call here
         // fake update fake app data here
@@ -52,7 +67,7 @@ const Workouts = () => {
                     `https://reqres.in/api/WeightLiftingBW`)
     }
 
-    const addWorkout = (workout) => {
+    const addWorkout = (e, workout) => {
 
         // e.preventDefault()
         // console.log('add exercise', workout)
@@ -71,7 +86,7 @@ const Workouts = () => {
     }
 
 
-    const editWorkout = (e, exercise) => {
+    const editWorkout = (e, workout) => {
         // e.preventDefault()
         // console.log('save edited exercise', exercise)
         // // console.log([
@@ -90,41 +105,73 @@ const Workouts = () => {
         //     ...myExercises.slice(exercise.id + 1)
         // ])
         updateItem( e,
-                    item,
-                    appContainer,
-                    setter,
-                    url)
+                    workout,
+                    myWorkout,
+                    setMyWorkouts,
+                    `https://reqres.in/api/WeightLiftingBW`)
     }
     const createWorkout = (e, workout) => {
 
         addItem(    e,
-                    item,
-                    appContainer,
-                    setter,
-                    url)
+                    workout,
+                    myWorkout,
+                    setMyWorkouts,
+                    `https://reqres.in/api/WeightLiftingBW`)
 
     }
-
-}
-export default Workouts;
-
-const Workouts = () => {
-
-    const [myWorkouts, setMyWorkouts] = setState([])
-    // const showWorkouts()
-
     return (
         <div>
-
             {/* {workoutData.map((workout, i) => {
                 <Workout
                     key={i}
                     workout={workout}
                     deleteWorkout={deleteWorkout}
                     editWorkout={editWorkout}/>            })} */}
+            {/* button with presetup data */}
+            {/* works */}
+            <button onClick={(e)=>{
+                createWorkout(e,
+                    {
+                        id: 2,
+                        date: "3/20/2020",
+                        workout_name: "Bicepts",
+                        user_id: 3
+                    })
+                }}>create</button>
+            {/* works */}
+            <button onClick={(e)=>{
+                getWorkouts(e)
+                }}>read</button>
+            {/* <button onClick={(e)=>{
+                updateWorkout(e)
+                }}>update</button> */}
+            {/* works */}
+            <button onClick={(e)=>{
+                deleteWorkout(e,
+                    {
+                        id: 1,
+                        date: "2/20/2020",
+                        workout_name: "Triceps",
+                        user_id: 1
+                    })
+                }}>delete</button>
+            
+            {/* works */}
+            <button onClick={(e)=>{
+                editWorkout(e,
+                    {
+                        id: 1,
+                        date: "2/20/2090",
+                        workout_name: "Head",
+                        user_id: 1
+                    })
+                }}>edit</button>
+            
+             <button onClick={(e)=>{
+                printWorkouts(e)
+                }}>print</button>
         </div>
     )
 
 }
-
-return default Workouts;
+export default Workouts;
