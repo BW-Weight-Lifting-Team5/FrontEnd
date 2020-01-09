@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
 import Exercise from './Exercise';
-
+import {
+    findState,
+    getContainer,
+    deleteItem,
+    updateItem,
+    addItem,
+} from './AxiosOperations'
+import axios from 'axios'
 import { workouts, exercises } from './ExerciseData';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 const initialExercise = {
 
     exerciseName: '',
@@ -10,6 +18,142 @@ const initialExercise = {
     id: 0
 
 }
+// on change functions
+
+// data for ui
+// let uiData = {
+//     h1 : 'exercise page',
+//     objects: 
+// }
+// let header1 = 'exercise page'
+
+// let 
+// const DataToTrack = () => {
+
+//     const [editing, setEditing] = useState(false);
+//     const [objectToEdit, setObjectToEdit] = useState(initialExercise)
+
+//     const [makeNewObject, setMakeNewObject] = useState(false)
+//     const [objectToAdd, setObjectToAdd] = useState(initialExercise)
+
+//     let [myObjects, setMyObjects] = useState(exercises[1])
+
+//     const deleteObject = myObject => {
+
+//         console.log('delete exercise', myObject)
+//         console.log(myObjects)
+//         setMyObjects(myObjects.filter(exer => exer.id !== myObject.id))
+//     }
+
+//     const editObject = (myObject) => {
+//         console.log('edit exercise', myObject)
+//         setEditing(true)
+//         setObjectToEdit(myObject)
+//     }
+//     const saveObject = (e, myObject) => {
+//         e.preventDefault()
+//         console.log('save edited exercise', myObject)
+//         // console.log([
+//         //     ...myExercises.slice(0, exercise.id),
+//         //     exercise,
+//         //     ...myExercises.slice(exercise.id + 1)
+//         // ])
+//         setMyObjects([
+//             ...myObjects.slice(0, myObject.id),
+//             myObject,
+//             ...myObjects.slice(myObject.id + 1)
+//         ])
+//         // setMyExercises([myExercises.spl, exercise])
+//     }
+//     const addObject = (e, myObject) => {
+//         e.preventDefault()
+//         console.log('add exercise', myObject)
+//         setMyObjects([...myObjects, myObject])
+//         // setMakeNewExercise(true)
+//         // setExerciseToAdd(exercise)
+//     }
+//     return (
+//         <div>
+//             <h1>header1</h1>
+
+//         </div>
+//     )
+
+
+// }
+// const findState = (tree, path) => {
+
+    
+//     if(tree === undefined) {
+//         return null
+//     }
+//     if(path.length === 0) {
+//         return tree
+//     }
+//     let firstNode = path[0]
+
+//     return findState(tree[firstNode], path.filter((node, i) => i > 0))
+
+// }
+// // generic read
+// const getContainer = (url, setter, pathToPayload, fakeData) => {
+//     axios
+//         .get(url)
+//         .then(res => {
+//             console.log(res)
+//             // setter(findState(res, pathToPayload))
+//             console.log(findState(res, pathToPayload))
+
+//         })
+//         .catch(err => {
+//             console.log(err)
+//         })
+//     setter(fakeData)
+    
+// }
+// // generic destroy
+// const deleteItem = (item, appContainer, setter, url) => {
+
+//     console.log('delete exercise', item)
+//     console.log(appContainer)
+//     // axios call here
+//     axios
+//         .delete(url, item)
+//         .then(res => {
+//             console.log(res)
+//         })
+//     setter(appContainer.filter(exer => exer.id !== item.id))
+// }
+
+// // generic update
+// const updateItem = (e, item, appContainer, setter, url) => {
+//     e.preventDefault()
+//     console.log('save edited exercise', item)
+//      axios
+//         .post(url, item)
+//         .then(res => {
+//             console.log(res)
+//         })
+//     setter([
+//         ...appContainer.filter(exer => exer.id !== item.id),
+//         item
+//         // ...appContainer.slice(item.id + 1)
+//     ])
+//     // setMyExercises([myExercises.spl, exercise])
+// }
+// // generic save
+// const saveItem = (e, item, appContainer, setter, url) => {
+//     e.preventDefault()
+//     console.log('add exercise', item)
+
+//     axios
+//         .post(url, item)
+//     setter([...appContainer, item])
+//     // setMakeNewExercise(true)
+//     // setExerciseToAdd(exercise)
+// }
+
+
 const Exercises = () => {
 
     const [editing, setEditing] = useState(false);
@@ -18,14 +162,40 @@ const Exercises = () => {
     const [makeNewExercise, setMakeNewExercise] = useState(false)
     const [exerciseToAdd, setExerciseToAdd] = useState(initialExercise)
 
-    let [myExercises, setMyExercises] = useState(exercises[1])
+    let [myExercises, setMyExercises] = useState([])
 
+    // read
+    const getExercises = () => {
+        // axios.get(`https://reqres.in/api/WeightLiftingBW`)
+        // .then(res => {
+        //     console.log(res)
+        //     setMyExercises(res.data)
+        // })
+        getContainer(`https://reqres.in/api/WeightLiftingBW`,
+                    setMyExercises,
+                    ['data'], 
+                    exercises[1])
+        console.log(myExercises)
+
+    }
     // delete
     const deleteExercise = exercise => {
 
-        console.log('delete exercise', exercise)
-        console.log(myExercises)
-        setMyExercises(myExercises.filter(exer => exer.id !== exercise.id))
+        // console.log('delete exercise', exercise)
+        // console.log(myExercises)
+        // // axios call here
+        // axios
+        // .delete(`https://reqres.in/api/WeightLiftingBW`, exercise)
+        // .then(res => {
+        //     console.log(res)
+        // })
+        // setMyExercises(myExercises.filter(exer => exer.id !== exercise.id))
+        deleteItem( exercise,
+                    myExercises,
+                    setMyExercises,
+                    `https://reqres.in/api/WeightLiftingBW`)
+
+
     }
 
     /// edit
@@ -37,18 +207,29 @@ const Exercises = () => {
     }
 
     const saveExercise = (e, exercise) => {
-        e.preventDefault()
-        console.log('save edited exercise', exercise)
-        // console.log([
+        // e.preventDefault()
+        // console.log('save edited exercise', exercise)
+        // // console.log([
+        // //     ...myExercises.slice(0, exercise.id),
+        // //     exercise,
+        // //     ...myExercises.slice(exercise.id + 1)
+        // // ])
+        // axios
+        // .post(`https://reqres.in/api/WeightLiftingBW`, exercise)
+        // .then(res => {
+        //     console.log(res)
+        // })
+        // setMyExercises([
         //     ...myExercises.slice(0, exercise.id),
         //     exercise,
         //     ...myExercises.slice(exercise.id + 1)
         // ])
-        setMyExercises([
-            ...myExercises.slice(0, exercise.id),
-            exercise,
-            ...myExercises.slice(exercise.id + 1)
-        ])
+        updateItem( e,
+                    exercise,
+                    myExercises,
+                    setMyExercises,
+                    `https://reqres.in/api/WeightLiftingBW`)
+
         // setMyExercises([myExercises.spl, exercise])
     }
     //////
@@ -67,6 +248,10 @@ date: "2/20/2020",
 workout_name: "Triceps",
 user_id: 1
 
+id: 2,
+date: "4/20/2020",
+workout_name: "Arms",
+user_id: 1
 
 
 email: "test123@email.com",
@@ -76,9 +261,15 @@ lastName: "knows"
 */
     // add
     const addExercise = (e, exercise) => {
-        e.preventDefault()
-        console.log('add exercise', exercise)
-        setMyExercises([...myExercises, exercise])
+        // e.preventDefault()
+        // console.log('add exercise', exercise)
+        // setMyExercises([...myExercises, exercise])
+        addItem(   e,
+                    exercise,
+                    myExercises,
+                    setMyExercises,
+                    `https://reqres.in/api/WeightLiftingBW`)
+
         // setMakeNewExercise(true)
         // setExerciseToAdd(exercise)
     }
@@ -86,8 +277,10 @@ lastName: "knows"
     return (
         <div>
             <h1>exercise page</h1>
-            {/* Read */}
-            {myExercises.map((exercise, i) => (
+            <button onClick={() => {getExercises()}}>
+                get exercises
+                </button> 
+            {myExercises.length > 0 && myExercises.map((exercise, i) => (
                 <Exercise
                     key={i}
                     exercise={exercise}

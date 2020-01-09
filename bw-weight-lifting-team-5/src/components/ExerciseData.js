@@ -3,9 +3,11 @@
 // workouts -> exercises
 // exercise
 
-export let workouts = {
-    1: [0, 1, 2]
-}
+export let workouts = [
+    { id: 1, date: "2/20/2020", workout_name: "Triceps", user_id: 1 },
+    { id: 2, date: "4/20/2020", workout_name: "Arms", user_id: 1 },
+    { id: 3, date: "3/20/2020", workout_name: "Legs", user_id: 1 }
+  ]
 
 export let exercises = {
 

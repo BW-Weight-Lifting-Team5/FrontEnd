@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import Loader from 'react-loader-spinner'
 import axios from 'axios'
-class Login extends React.Component {
+class Register extends React.Component {
 
   state = {
     credentials: {
@@ -30,42 +30,6 @@ class Login extends React.Component {
     })
     console.log(this.state)
   }
-  login = e => {
-      e.preventDefault();
-      this.setState({
-        isFetching: true
-      })
-    // email: "so@some.com"
-    // password: "$2a$10$VI9f921UQuuiCElRX8KD/OhsrZXpoOMvyvnlvpXni0Fq/2Jvokniq"
-    // firstName: "eee"
-    // lastName: "fff"
-
-    // email: "soeee@some.com"
-    // password: "$2eeea$10$VI9f921UQuuiCElRX8KD/OhsrZXpoOMvyvnlvpXni0Fq/2Jvokniq"
-    // firstName: "eee"
-    // lastName: "fff"
-
-    //   console.log(localStorage.getItem('token'))
-      const token = localStorage.getItem('token')
-      if(!token) {
-        //   console.log('have to use username and password')
-          axiosWithAuth()
-
-        .post('/login', this.state.credentials)
-        .then(res => {
-            console.log(res)
-          localStorage.setItem('token', res.data.payload)
-          this.props.history.push('/exercises')
-        })
-        .catch(err =>  console.log(err))
-      } else{
-        //   console.log('let user in')
-          this.props.history.push('/exercises')
-
-      }
-      
-
-    }
     // fake user
     // username: name
     // password: password
@@ -90,13 +54,54 @@ class Login extends React.Component {
     // firstName: "eee"
     // lastName: "fff"
 
+
+    register = e => {
+        e.preventDefault();
+        this.setState({
+          isFetching: true
+        })
+      //   console.log(localStorage.getItem('token'))
+        // const token = localStorage.getItem('token')
+        // if(!token) {
+        //   //   console.log('have to use username and password')
+        //     axiosWithAuth()
+        //     // axios
+        //     .post('/register', this.state.credentials)
+        //     // .post(`https://reqres.in/api/registerWeightLiftingBW`, this.state.credentials)
+        //     .then(res => {
+        //         console.log(res, res.data.payload)
+        //         // localStorage.setItem('token', res.data.payload)
+        //         this.props.history.push('/exercises')
+        //         console.log(this.props.history)
+        //     })
+        //     .catch(err =>  console.log('problem', err))
+        //     } else{
+        //     //   console.log('let user in')
+        //         this.props.history.push('/exercises')
+    
+        //     }
+        axiosWithAuth()
+            // axios
+            .post('/register', this.state.credentials)
+            // .post(`https://reqres.in/api/registerWeightLiftingBW`, this.state.credentials)
+            .then(res => {
+                console.log(res, res.data.payload)
+                // localStorage.setItem('token', res.data.payload)
+                this.props.history.push('/login')
+                console.log(this.props.history)
+            })
+        
+  
+      }
+
   render() {
     return (
       <div>
           {/* email, password, firstname, lastname */}
         <h1>Welcome to the Fitness App!</h1>
-        <form onSubmit={this.login}>
-            <input
+
+        <form onSubmit={this.register}>
+        <input
                 type="text"
                 name="email"
                 value={this.state.credentials.email}
@@ -128,7 +133,7 @@ class Login extends React.Component {
                 placeholder='lastname'
   
             />
-            <button>Log in</button>
+            <button>register</button>
             {this.state.isFetching && 
                 <Loader
                 type="Puff"
@@ -140,12 +145,10 @@ class Login extends React.Component {
             /> 
             }
         </form>
-
-        
       </div>
     );
   }
   
 };
 
-export default Login;
+export default Register;

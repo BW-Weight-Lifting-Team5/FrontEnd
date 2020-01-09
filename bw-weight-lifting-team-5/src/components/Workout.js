@@ -1,25 +1,24 @@
 import React from 'react'
 
-const Exercise = (props) => {
+const Workout = (props) => {
 
-    const { exerciseName, reps, bodyPart, id } = props.exercise
+    const { date, name } = props.workout
 
     return (
         <div>
             {/* <p>Edit</p> */}
             <h3><span className='delete' onClick={e => {
                 e.stopPropagation()
-                props.deleteExercise(props.exercise)
+                props.deleteWorkout(props.workout)
             }}>x </span>
                 {exerciseName}
                 <span onClick={e => {
                     e.stopPropagation()
-                    props.editExercise(props.exercise)
+                    props.editWorkout(props.workout)
                 }}> edit</span></h3>
-            <p>{String(reps)}</p>
-            <p>{bodyPart}</p>
-            <p>{String(id)}</p>
+            <p>{date}</p>
+            <p>{name}</p>
         </div>
     )
 }
-export default Exercise;
+export default Workout;
